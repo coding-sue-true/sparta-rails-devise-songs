@@ -5,11 +5,14 @@ class SongsController < ApplicationController
   # GET /songs.json
   def index
     @songs = Song.all
+    @songs = current_user.songs
   end
 
   # GET /songs/1
   # GET /songs/1.json
   def show
+    if(@post.user.id != current_user.id)
+    redirect_to posts_path
   end
 
   # GET /songs/new
@@ -19,6 +22,9 @@ class SongsController < ApplicationController
 
   # GET /songs/1/edit
   def edit
+    if(@post.user.id != current_user.id)
+    redirect_to posts_path
+end
   end
 
   # POST /songs
@@ -70,5 +76,6 @@ class SongsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def song_params
       params.fetch(:song, {})
+      params.require(:song).permit(:title, :band)
     end
 end
