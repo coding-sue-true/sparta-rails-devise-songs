@@ -11,6 +11,16 @@
     </div>
   <% end %>
 
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title, id: :song_title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :band %>
+    <%= form.text_field :band, id: :song_band %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>
