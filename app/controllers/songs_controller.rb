@@ -11,8 +11,8 @@ class SongsController < ApplicationController
   # GET /songs/1
   # GET /songs/1.json
   def show
-    if(@post.user.id != current_user.id)
-    redirect_to posts_path
+    if(@song.user.id != current_user.id)
+    redirect_to songs_path
     end
   end
 
@@ -27,8 +27,8 @@ class SongsController < ApplicationController
 
   # GET /songs/1/edit
   def edit
-    if(@post.user.id != current_user.id)
-    redirect_to posts_path
+    if(@song.user.id != current_user.id)
+    redirect_to songs_path
     end
   end
 
@@ -36,6 +36,7 @@ class SongsController < ApplicationController
   # POST /songs.json
   def create
     @song = Song.new(song_params)
+    @song.user = current_user
 
     respond_to do |format|
       if @song.save
@@ -80,7 +81,6 @@ class SongsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def song_params
-      params.fetch(:song, {})
       params.require(:song).permit(:title, :band)
     end
 end
