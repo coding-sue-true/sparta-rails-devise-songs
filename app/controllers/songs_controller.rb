@@ -13,6 +13,11 @@ class SongsController < ApplicationController
   def show
     if(@post.user.id != current_user.id)
     redirect_to posts_path
+    end
+  end
+
+  def main
+    @songs = Song.all
   end
 
   # GET /songs/new
@@ -24,7 +29,7 @@ class SongsController < ApplicationController
   def edit
     if(@post.user.id != current_user.id)
     redirect_to posts_path
-end
+    end
   end
 
   # POST /songs
